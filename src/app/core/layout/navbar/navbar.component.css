@@ -1,0 +1,50 @@
+.navbar {
+    background-color: #333131; /* Fondo oscuro */
+    border-bottom: 3px solid #1abc9c; /* Borde inferior turquesa */
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+  }
+  
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1abc9c; /* Turquesa */
+  }
+  
+.spacer {
+    flex: 1;
+  }
+  
+.nav-button {
+    color: #ffffff;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+  }
+.nav-button {
+    color: #ffffff;
+}
+.nav-button:hover {
+    color: #1abc9c; /* Turquesa */
+  }
+  
+.menu-button mat-icon {
+    color: #ffffff;
+  }
+/* Ocultamos el botón de menú por defecto en pantallas grandes */
+.menu-button {
+    display: none;
+  }
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+    .nav-buttons {
+      display: none;
+    }
+    .menu-button {
+      display: inline-flex;
+    }
+    .menu-button button,
+    .menu-button mat-icon {
+      color: #ffffff !important;
+    }
+  }

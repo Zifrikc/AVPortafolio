@@ -1,0 +1,30 @@
+<mat-toolbar class="navbar">
+    <span class="logo">MiPortafolio</span>
+    <span class="spacer"></span>
+  
+    <!-- Botones de navegación inline para pantallas grandes -->
+    <div class="nav-buttons">
+      <ng-container *ngFor="let link of navLinks">
+        <button mat-button class="nav-button" [routerLink]="link.path">
+          <!-- <mat-icon>{{ link.icon }}</mat-icon> -->
+          {{ link.label }}
+        </button>
+      </ng-container>
+    </div>
+  
+    <!-- Botón de menú desplegable para pantallas pequeñas -->
+    <div class="menu-button">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <ng-container *ngFor="let link of navLinks">
+          <button mat-menu-item [routerLink]="link.path">
+            <!-- <mat-icon>{{ link.icon }}</mat-icon> -->
+            <span>{{ link.label }}</span>
+          </button>
+        </ng-container>
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+  
