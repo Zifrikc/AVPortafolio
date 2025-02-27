@@ -5,7 +5,7 @@
     <!-- Botones de navegación inline para pantallas grandes -->
     <div class="nav-buttons">
       <ng-container *ngFor="let link of navLinks">
-        <button mat-button class="nav-button" [routerLink]="link.path">
+        <button mat-button class="nav-buttons color-primary" [routerLink]="link.path">
           <!-- <mat-icon>{{ link.icon }}</mat-icon> -->
           {{ link.label }}
         </button>
@@ -19,7 +19,7 @@
       </button>
       <mat-menu #menu="matMenu">
         <ng-container *ngFor="let link of navLinks">
-          <button mat-menu-item [routerLink]="link.path">
+          <button mat-menu-item [routerLink]="link.path" class="nav-button bg-primary">
             <!-- <mat-icon>{{ link.icon }}</mat-icon> -->
             <span>{{ link.label }}</span>
           </button>
