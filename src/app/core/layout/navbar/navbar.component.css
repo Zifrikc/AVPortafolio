@@ -5,16 +5,16 @@
     display: flex;
     align-items: center;
   }
-  
+
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #1abc9c; /* Turquesa */
+    color: #1abc9c ; /* Turquesa */
   }
 .spacer {
     flex: 1;
   }
-  
+
 .nav-buttons {
     color: #ffffff !important;
     font-weight: 500;
@@ -24,7 +24,7 @@
 .nav-buttons:hover {
     color: #1abc9c !important; /* Turquesa */
   }
-  
+
 .menu-button mat-icon {
     color: #ffffff;
   }
