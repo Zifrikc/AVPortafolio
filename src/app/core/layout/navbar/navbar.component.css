@@ -1,47 +1,74 @@
 .navbar {
-    background-color: #333131; /* Fondo oscuro */
-    border-bottom: 3px solid #1abc9c; /* Borde inferior turquesa */
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-  }
+  position: relative;
+  background-image: url('https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1741307089/bg-navbar_a3nq6i.png');
+  background-size: cover; /* Asegura que la imagen cubra toda el área del navbar */
+  background-position: center; /* Centra la imagen de fondo */
+  opacity: 65%;
+  border-bottom: 3px solid #1abc9c; /* Borde inferior turquesa */
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease; /* Transición de opacidad para efectos de hover o cambios */
+}
+
+.navbar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4); /* Filtro oscuro para mejorar el contraste */
+  z-index: 0;
+}
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #1abc9c ; /* Turquesa */
-  }
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1abc9c; /* Turquesa */
+  z-index: 1; /* Asegura que el logo esté por encima del fondo */
+}
+
 .spacer {
-    flex: 1;
-  }
+  flex: 1;
+}
 
 .nav-buttons {
-    color: #ffffff !important;
-    font-weight: 500;
-    transition: color 0.3s ease-in-out;
-  }
+  color: #ffffff !important;
+  font-weight: 500;
+  z-index: 1; /* Asegura que los botones estén por encima del fondo */
+}
 
 .nav-buttons:hover {
-    color: #1abc9c !important; /* Turquesa */
-  }
+  color: #1abc9c !important; /* Turquesa */
+}
 
 .menu-button mat-icon {
-    color: #ffffff;
-  }
+  color: #ffffff;
+}
+
+
+
+.navbar:hover{
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Ocultamos el botón de menú por defecto en pantallas grandes */
 .menu-button {
-    display: none;
-  }
+  display: none;
+}
+
 /* Media query para pantallas pequeñas */
 @media (max-width: 600px) {
-    .nav-buttons {
-      display: none;
-    }
-    .menu-button {
-      display: inline-flex;
-    }
-    .menu-button button,
-    .menu-button mat-icon {
-      color: #ffffff !important;
-    }
+  .nav-buttons {
+    display: none;
   }
+  .menu-button {
+    display: inline-flex;
+  }
+  .menu-button button,
+  .menu-button mat-icon {
+    color: #ffffff !important;
+  }
+}
