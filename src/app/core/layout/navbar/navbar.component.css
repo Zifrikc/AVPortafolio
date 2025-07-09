@@ -1,25 +1,19 @@
 .navbar {
-  position: relative;
-  background-image: url('https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1741307089/bg-navbar_a3nq6i.png');
-  background-size: cover; /* Asegura que la imagen cubra toda el área del navbar */
-  background-position: center; /* Centra la imagen de fondo */
-  opacity: 65%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
   border-bottom: 3px solid #1abc9c; /* Borde inferior turquesa */
   padding: 0 16px;
   display: flex;
   align-items: center;
-  transition: opacity 0.3s ease; /* Transición de opacidad para efectos de hover o cambios */
+  transition: background-color 0.3s ease;
+  z-index: 1000;
 }
 
-.navbar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.4); /* Filtro oscuro para mejorar el contraste */
-  z-index: 0;
+.navbar:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro semitransparente al pasar el mouse */
 }
 
 .logo {
