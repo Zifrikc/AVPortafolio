@@ -1,43 +1,63 @@
 .projects-container {
-  position: relative;
-  width: 100%;
-  min-height: 120vh; /* Asegura que se ajuste a la pantalla */
-  background: url('https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1672364395/Testalbun/thumb-1920-548279_jvpkvp.jpg') no-repeat center center;
-  background-size: 100% auto; /* Ajusta el ancho al 100% sin cortar la imagen */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #fff;
+    padding: 60px 20px;
 }
 
-/* Superposición para contraste */
-.projects-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-}
-.projects-container {
-  padding: 40px 20px;
-  text-align: center;
-  background-color: #f5f5f5; /* Color de fondo suave para esta sección */
+.projects-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #fff;
+    text-align: center;
 }
 
 .projects-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+
 }
 
 .project-card {
-  width: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-color: #1abc9c;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
 }
 
 .project-card img {
-  height: 200px;
-  object-fit: cover;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-card-content {
+    padding: 20px;
+    
+}
+
+.project-card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.project-card-content p {
+    font-size: 1rem;
+    color: #eee;
+    margin-bottom: 20px;
+}
+
+.project-card-content .mat-raised-button {
+    width: 100%;
 }

@@ -1,62 +1,112 @@
 
 
+
 .hero-container {
   position: relative;
   width: 100%;
-  min-height: 90vh; /* Asegura que se ajuste a la pantalla */
-  background: url('https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1672364395/Testalbun/thumb-1920-548279_jvpkvp.jpg') no-repeat center center;
-  background-size: 100% auto; /* Ajusta el ancho al 100% sin cortar la imagen */
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
   color: #fff;
+  padding: 20px;
+  border-bottom: 3px solid #1abc9c;
 }
 
-/* Superposición para contraste */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.1);
 }
 
-/* Contenido */
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 600px;
-  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 900px;
+  width: 100%;
 }
 
-/* Texto */
-.hero-content h1 {
-  font-size: 3rem;
+.profile-img-container {
+  flex-shrink: 0;
+  margin-right: 40px;
+
+}
+
+.profile-img {
+  width: 300px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 30px 0 30px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-color: black;
+  border-width: 3.5px;
+  border-style: solid;
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.hero-text {
+  text-align: left;
+}
+
+.hero-text h1 {
+  font-size: 3.5rem;
   margin-bottom: 1rem;
+  font-weight: bold;
+  color: #1abc9c;
 }
 
-.hero-content p {
-  font-size: 1.2rem;
+.hero-text p {
+  font-size: 1.3rem;
   margin-bottom: 2rem;
 }
-
-/* Imagen de perfil */
-.profile-img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1rem;
+.p-style{
+  color: #1abc9c;
+}
+.hero-text button {
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .hero-content h1 {
-      font-size: 2rem;
+.hero-text button:hover {
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
   }
-  .hero-content p {
-      font-size: 1rem;
+
+  .profile-img-container {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 30px;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-text p {
+    font-size: 1.1rem;
   }
 }
+
