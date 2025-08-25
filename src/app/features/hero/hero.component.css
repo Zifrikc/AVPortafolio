@@ -75,7 +75,10 @@
 .hero-text button {
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
-
+.btnModels:hover{
+color: #1abc9c;
+border-color: black 1px solid;
+}
 .hero-text button:hover {
   transform: translateY(-3px);
 }

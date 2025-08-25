@@ -19,14 +19,14 @@ interface Project {
 export class ProjectsComponent {
   projects: Project[] = [
     {
-      title: 'Proyecto 1',
-      description: 'Descripción breve del proyecto 1',
-      imageUrl: 'https://via.placeholder.com/300x200'
+      title: 'Analizador de imagenes de minerales ',
+      description: 'Proyecto con java script y python para el analisis de imagenes de minerales usando inteligencia artificial ultralitics y roboflow',
+      imageUrl: 'https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1732908394/d78a3f28-3e47-4140-8236-75bf97bbab00.png'
     },
     {
-      title: 'Proyecto 2',
-      description: 'Descripción breve del proyecto 2',
-      imageUrl: 'https://via.placeholder.com/300x200'
+      title: 'Ionic App',
+      description: 'Calculadora de  numeros Base 10 para colegios',
+      imageUrl: 'https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1756075983/project2_slide_j28jrm.png'
     },
     // Agrega más proyectos según sea necesario
   ];

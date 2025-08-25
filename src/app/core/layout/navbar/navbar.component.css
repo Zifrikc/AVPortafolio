@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   background-color: transparent;
-  border-bottom: 3px solid #1abc9c; /* Borde inferior turquesa */
+  /*border-bottom: 3px solid #adadad; /* Borde inferior turquesa */
   padding: 0 16px;
   display: flex;
   align-items: center;
