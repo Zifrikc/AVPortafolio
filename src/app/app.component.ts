@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './core/layout/navbar/navbar.component';
 import { HeroComponent } from './features/hero/hero.component';
@@ -10,6 +10,7 @@ import { SkillsComponent } from './features/skills/skills.component';
   selector: 'app-root',
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, HeroComponent, ProjectsComponent, FooterComponent, SkillsComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
