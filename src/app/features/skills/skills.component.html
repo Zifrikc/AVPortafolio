@@ -1,14 +1,91 @@
 <div class="skills-container">
-  <h2>Habilidades Técnicas</h2>
-  <div class="slider">
-    <div class="slide-track">
-      <div class="slide" *ngFor="let skill of skills">
-        <img [src]="skill.logo" [alt]="skill.name">
+  <div class="skills-header">
+    <h2 class="skills-title">Habilidades Técnicas</h2>
+    <p class="skills-subtitle">Stack Tecnológico</p>
+  </div>
+
+  <div class="honeycomb-wrapper">
+    <div class="honeycomb">
+      <!-- Fila 1 (1 hexágono) -->
+      <div class="hex-row row-1">
+        <div class="hexagon" [style.--hex-color]="skills[0].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[0].logo" [alt]="skills[0].name" class="hex-icon">
+            <span class="hex-name">{{ skills[0].name }}</span>
+          </div>
+        </div>
       </div>
-      <!-- Repeat the slides for a seamless loop -->
-      <div class="slide" *ngFor="let skill of skills">
-        <img [src]="skill.logo" [alt]="skill.name">
+
+      <!-- Fila 2 (2 hexágonos) -->
+      <div class="hex-row row-2">
+        <div class="hexagon" [style.--hex-color]="skills[1].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[1].logo" [alt]="skills[1].name" class="hex-icon">
+            <span class="hex-name">{{ skills[1].name }}</span>
+          </div>
+        </div>
+        <div class="hexagon" [style.--hex-color]="skills[2].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[2].logo" [alt]="skills[2].name" class="hex-icon">
+            <span class="hex-name">{{ skills[2].name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 3 (3 hexágonos) -->
+      <div class="hex-row row-3">
+        <div class="hexagon" [style.--hex-color]="skills[3].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[3].logo" [alt]="skills[3].name" class="hex-icon">
+            <span class="hex-name">{{ skills[3].name }}</span>
+          </div>
+        </div>
+        <div class="hexagon" [style.--hex-color]="skills[4].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[4].logo" [alt]="skills[4].name" class="hex-icon">
+            <span class="hex-name">{{ skills[4].name }}</span>
+          </div>
+        </div>
+        <div class="hexagon" [style.--hex-color]="skills[5].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[5].logo" [alt]="skills[5].name" class="hex-icon">
+            <span class="hex-name">{{ skills[5].name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 4 (4 hexágonos) -->
+      <div class="hex-row row-4">
+        <div class="hexagon" [style.--hex-color]="skills[6].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[6].logo" [alt]="skills[6].name" class="hex-icon">
+            <span class="hex-name">{{ skills[6].name }}</span>
+          </div>
+        </div>
+        <div class="hexagon" [style.--hex-color]="skills[7].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[7].logo" [alt]="skills[7].name" class="hex-icon">
+            <span class="hex-name">{{ skills[7].name }}</span>
+          </div>
+        </div>
+        <div class="hexagon" [style.--hex-color]="skills[8].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[8].logo" [alt]="skills[8].name" class="hex-icon">
+            <span class="hex-name">{{ skills[8].name }}</span>
+          </div>
+        </div>
+        <div class="hexagon" [style.--hex-color]="skills[9].color">
+          <div class="hexagon-inner">
+            <img [src]="skills[9].logo" [alt]="skills[9].name" class="hex-icon">
+            <span class="hex-name">{{ skills[9].name }}</span>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+
+  <!-- Floating Particles Effect -->
+  <div class="particles">
+    <div class="particle" *ngFor="let p of [1,2,3,4,5,6,7,8,9,10]"></div>
   </div>
 </div>

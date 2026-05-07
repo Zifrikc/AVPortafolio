@@ -9,24 +9,262 @@ html, body {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
   transition: background-color 0.3s ease;
+  scroll-behavior: smooth;
 }
 
 body {
     background: url('https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1755977665/bg_01_top_fphfj9.jpg') no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
+    background-color: #0a0a0a;
+    position: relative;
+    overflow-x: hidden;
 }
 
+/* ========== GEOMETRIC BACKGROUND SHAPES ========== */
+body::before {
+  content: '';
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba(26, 188, 156, 0.1) 0%, rgba(26, 188, 156, 0.05) 100%);
+  border: 2px solid rgba(26, 188, 156, 0.15);
+  border-radius: 50%;
+  animation: float-geometric 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: 15%;
+  left: 8%;
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(225deg, rgba(26, 188, 156, 0.08) 0%, rgba(26, 188, 156, 0.03) 100%);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border: 2px solid rgba(26, 188, 156, 0.1);
+  animation: rotate-geometric 12s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========== GLOBAL ANIMATIONS ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(26, 188, 156, 0.8);
+  }
+}
+
+@keyframes float-geometric {
+  0%, 100% {
+    transform: translate(0, 0);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(50px, -50px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate(-50px, 30px);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translate(20px, 60px);
+    opacity: 0.5;
+  }
+}
+
+@keyframes rotate-geometric {
+  0% {
+    transform: rotate(0deg) translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.3;
+    transform: rotate(180deg) translateY(-20px);
+  }
+  100% {
+    transform: rotate(360deg) translateY(0);
+    opacity: 0.5;
+  }
+}
+
+/* ========== SCROLLBAR STYLING ========== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1abc9c 0%, #0fb9d0 100%);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1abc9c;
+  box-shadow: 0 0 10px rgba(26, 188, 156, 0.5);
+}
+
+/* ========== CARD GLOBAL STYLES ========== */
 .card {
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(26, 188, 156, 0.3) !important;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(26, 188, 156, 0.2);
 }
 
+/* ========== MODAL BACKDROP ========== */
 .modal-backdrop.show {
     backdrop-filter: blur(10px);
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* ========== BUTTON GLOBAL STYLES ========== */
+button, .btn {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+button:focus, .btn:focus {
+  outline: 2px solid rgba(26, 188, 156, 0.5);
+  outline-offset: 2px;
+}
+
+/* ========== INPUT STYLES ========== */
+input, textarea, select {
+  font-family: 'Roboto', sans-serif;
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(26, 188, 156, 0.2);
+  color: #fff;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  background: rgba(30, 30, 30, 0.95);
+  border-color: #1abc9c;
+  box-shadow: 0 0 15px rgba(26, 188, 156, 0.3);
+  outline: none;
+}
+
+/* ========== LINKS ========== */
+a {
+  color: #1abc9c;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+a:hover {
+  color: #0fb9d0;
+  text-shadow: 0 0 10px rgba(26, 188, 156, 0.5);
+}
+
+/* ========== HEADINGS ========== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* ========== MATERIAL OVERRIDES ========== */
+.mat-mdc-button, .mat-mdc-raised-button {
+  font-family: 'Roboto', sans-serif !important;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.mat-toolbar {
+  backdrop-filter: blur(10px);
+  background: rgba(30, 30, 30, 0.8) !important;
+  border-bottom: 1px solid rgba(26, 188, 156, 0.2);
+}
+
+/* ========== LOADING & ANIMATION UTILITIES ========== */
+.fade-in {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.slide-in {
+  animation: slideInLeft 0.6s ease forwards;
+}
+
+.glow-effect {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* ========== UTILITY CLASSES ========== */
+.text-gradient {
+  background: linear-gradient(135deg, #1abc9c 0%, #0fb9d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+  background: rgba(30, 30, 30, 0.8);
+}
+
+.border-glow {
+  border: 1.5px solid rgba(26, 188, 156, 0.3);
+  box-shadow: 0 0 15px rgba(26, 188, 156, 0.1);
+  transition: all 0.3s ease;
+}
+
+.border-glow:hover {
+  border-color: #1abc9c;
+  box-shadow: 0 0 25px rgba(26, 188, 156, 0.3);
+}
+
+/* ========== ACCESSIBILITY ========== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ========== DARK MODE SUPPORT ========== */
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #fff;
+    background-color: #0a0a0a;
+  }
 }

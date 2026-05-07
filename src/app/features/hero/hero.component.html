@@ -2,67 +2,48 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="profile-img-container">
-        <img class="profile-img" src="https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1751728192/avatar2_oicuzt.png" alt="Tu Nombre" />
+        <img class="profile-img" src="https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1751728192/avatar2_oicuzt.png" alt="Ashley Zifrikc V.T." />
       </div>
       <div class="hero-text">
         <h1>Ashley Zifrikc V.T.</h1>
-        <p class="p-style">Desarrollador web profesional.</p> <p>Transformo ideas en experiencias digitales.</p>
-<p>Mi objetivo es diseñar y construir aplicaciones web innovadoras que conecten, inspiren y generen impacto.</p>
-        <button  class="btnModels" mat-raised-button routerLink="/projects">Ver Proyectos</button>
-        <br>
+        <p class="p-style">Desarrollador web profesional.</p> 
+        <p>Transformo ideas en experiencias digitales.</p>
+        <p>Mi objetivo es diseñar y construir aplicaciones web innovadoras que conecten, inspiren y generen impacto.</p>
+        
+        <div class="hero-buttons">
+          <button class="btnModels" mat-raised-button routerLink="/projects">Ver Proyectos</button>
+          <button class="btnModels" mat-raised-button data-bs-toggle="modal" data-bs-target="#certificatesModal">Ver Certificados</button>
+        </div>
 
         <elevenlabs-convai agent-id="agent_4901k5w52pbjesatdx69v81q9f7t"></elevenlabs-convai>
-        <elevenlabs-convai agent-id="agent_4901k5w52pbjesatdx69v81q9f7t"></elevenlabs-convai><script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-
-        <br>
-        <br>
-        <button class="btnModels" mat-raised-button data-bs-toggle="modal" data-bs-target="#certificatesModal">Ver Certificados</button>
+        <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
       </div>
     </div>
-    <!-- Aquí el widget de JACK -->
-    <!-- <div class="sketchfab-embed-wrapper"> <iframe title="Eye of Agamotto" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/18bd4659b9ca47e280ac6e8c0bb7d601/embed?autostart=1&transparent=1&ui_infos=0&ui_stop=0&ui_inspector=0&ui_watermark_link=0&ui_watermark=0&ui_hint=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_annotations=0"> </iframe> </div> -->
   </div>
 
-<!-- Modal -->
+<!-- Certificados Modal -->
 <div class="modal fade" id="certificatesModal" tabindex="-1" aria-labelledby="certificatesModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content certificates-modal">
+      <div class="modal-header certificates-modal-header">
         <h5 class="modal-title" id="certificatesModalLabel">Mis Certificados</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close-custom-x" data-bs-dismiss="modal" aria-label="Close">✕</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body certificates-modal-body">
         <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-4">
-              <div class="card">
-                <img src="https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1756080086/7a4241a9-9f44-4a1d-a5fa-2970dd5a8f5e.png" class="card-img-top" alt="Certificado 1">
-                <div class="card-body">
-                  <h5 class="card-title">Certificado 1</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <img src="https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1756080113/39d992d1-ed90-4f5e-bc5f-57acedd599e9.png" class="card-img-top" alt="Certificado 2">
-                <div class="card-body">
-                  <h5 class="card-title">Certificado 2</h5>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <img src="https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1756080131/de4b6f6c-2cd2-4b06-a057-1e05dc6a81fc.png" class="card-img-top" alt="Certificado 3">
-                <div class="card-body">
-                  <h5 class="card-title">Certificado 3</h5>
+          <div class="certificates-grid">
+            <div class="certificate-card" *ngFor="let cert of certificates">
+              <div class="certificate-inner">
+                <img [src]="cert.image" class="certificate-image" [alt]="cert.title">
+                <div class="certificate-info">
+                  <div class="certificate-badge">✓</div>
+                  <h6 class="certificate-title">{{ cert.title }}</h6>
+                  <p class="certificate-issuer">{{ cert.issuer }}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>
