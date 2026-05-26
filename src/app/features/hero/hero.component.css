@@ -24,6 +24,37 @@
   pointer-events: none;
 }
 
+.spline-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  opacity: 0.6;
+  animation: float-spline 6s ease-in-out infinite;
+}
+
+@keyframes float-spline {
+  0%, 100% {
+    transform: translateY(0px);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.7;
+  }
+}
+
+spline-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
