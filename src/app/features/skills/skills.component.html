@@ -1,14 +1,16 @@
 <div class="skills-container">
+  <!-- Cabecera HUD de Habilidades -->
   <div class="skills-header">
+    <div class="hud-tag">SKILLS_MATRIX_v1.0</div>
     <h2 class="skills-title">Habilidades Técnicas</h2>
-    <p class="skills-subtitle">Stack Tecnológico</p>
+    <p class="skills-subtitle">Inyección y Sincronización del Stack Tecnológico</p>
   </div>
 
   <div class="honeycomb-wrapper">
     <div class="honeycomb">
-      <!-- Fila 1 (1 hexágono) -->
+      <!-- Fila 1 (HTML) -->
       <div class="hex-row row-1">
-        <div class="hexagon" [style.--hex-color]="skills[0].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[0].color" style="animation-delay: 100ms;">
           <div class="hexagon-inner">
             <img [src]="skills[0].logo" [alt]="skills[0].name" class="hex-icon">
             <span class="hex-name">{{ skills[0].name }}</span>
@@ -16,15 +18,15 @@
         </div>
       </div>
 
-      <!-- Fila 2 (2 hexágonos) -->
+      <!-- Fila 2 (Angular, JS) -->
       <div class="hex-row row-2">
-        <div class="hexagon" [style.--hex-color]="skills[1].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[1].color" style="animation-delay: 200ms;">
           <div class="hexagon-inner">
             <img [src]="skills[1].logo" [alt]="skills[1].name" class="hex-icon">
             <span class="hex-name">{{ skills[1].name }}</span>
           </div>
         </div>
-        <div class="hexagon" [style.--hex-color]="skills[2].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[2].color" style="animation-delay: 300ms;">
           <div class="hexagon-inner">
             <img [src]="skills[2].logo" [alt]="skills[2].name" class="hex-icon">
             <span class="hex-name">{{ skills[2].name }}</span>
@@ -32,21 +34,21 @@
         </div>
       </div>
 
-      <!-- Fila 3 (3 hexágonos) -->
+      <!-- Fila 3 (TS, Node, Spring Boot) -->
       <div class="hex-row row-3">
-        <div class="hexagon" [style.--hex-color]="skills[3].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[3].color" style="animation-delay: 400ms;">
           <div class="hexagon-inner">
             <img [src]="skills[3].logo" [alt]="skills[3].name" class="hex-icon">
             <span class="hex-name">{{ skills[3].name }}</span>
           </div>
         </div>
-        <div class="hexagon" [style.--hex-color]="skills[4].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[4].color" style="animation-delay: 500ms;">
           <div class="hexagon-inner">
             <img [src]="skills[4].logo" [alt]="skills[4].name" class="hex-icon">
             <span class="hex-name">{{ skills[4].name }}</span>
           </div>
         </div>
-        <div class="hexagon" [style.--hex-color]="skills[5].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[5].color" style="animation-delay: 600ms;">
           <div class="hexagon-inner">
             <img [src]="skills[5].logo" [alt]="skills[5].name" class="hex-icon">
             <span class="hex-name">{{ skills[5].name }}</span>
@@ -54,27 +56,27 @@
         </div>
       </div>
 
-      <!-- Fila 4 (4 hexágonos) -->
+      <!-- Fila 4 (.NET C#, SQL, Git, AWS) -->
       <div class="hex-row row-4">
-        <div class="hexagon" [style.--hex-color]="skills[6].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[6].color" style="animation-delay: 700ms;">
           <div class="hexagon-inner">
             <img [src]="skills[6].logo" [alt]="skills[6].name" class="hex-icon">
             <span class="hex-name">{{ skills[6].name }}</span>
           </div>
         </div>
-        <div class="hexagon" [style.--hex-color]="skills[7].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[7].color" style="animation-delay: 800ms;">
           <div class="hexagon-inner">
             <img [src]="skills[7].logo" [alt]="skills[7].name" class="hex-icon">
             <span class="hex-name">{{ skills[7].name }}</span>
           </div>
         </div>
-        <div class="hexagon" [style.--hex-color]="skills[8].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[8].color" style="animation-delay: 900ms;">
           <div class="hexagon-inner">
             <img [src]="skills[8].logo" [alt]="skills[8].name" class="hex-icon">
             <span class="hex-name">{{ skills[8].name }}</span>
           </div>
         </div>
-        <div class="hexagon" [style.--hex-color]="skills[9].color">
+        <div class="hexagon animate-stagger" [style.--hex-color]="skills[9].color" style="animation-delay: 1000ms;">
           <div class="hexagon-inner">
             <img [src]="skills[9].logo" [alt]="skills[9].name" class="hex-icon">
             <span class="hex-name">{{ skills[9].name }}</span>
@@ -84,8 +86,10 @@
     </div>
   </div>
 
-  <!-- Floating Particles Effect -->
-  <div class="particles">
-    <div class="particle" *ngFor="let p of [1,2,3,4,5,6,7,8,9,10]"></div>
+  <!-- Efecto de Lluvia de Código Binario Cyberpunk de Fondo -->
+  <div class="matrix-rain">
+    <div class="rain-column" *ngFor="let c of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]">
+      <span *ngFor="let char of [1,2,3,4,5,6,7,8]">{{ (char + c) % 2 }}</span>
+    </div>
   </div>
 </div>

@@ -1,30 +1,110 @@
 <mat-toolbar class="navbar">
-    <span class="logo">AV</span>
-    <span class="spacer"></span>
-  
-    <!-- Botones de navegación inline para pantallas grandes -->
-    <div class="nav-buttons">
+  <!-- Logo Cyberpunk con efecto glitch -->
+  <span class="logo clickable" (click)="scrollToSection($event, '#home')">AV // NET</span>
+  <span class="spacer"></span>
+
+  <!-- Botones de navegación inline para pantallas grandes con smooth scroll -->
+  <div class="nav-buttons">
+    <ng-container *ngFor="let link of navLinks">
+      <a class="nav-item-link" [href]="link.path" (click)="scrollToSection($event, link.path)">
+        <span class="link-bracket">[</span>
+        {{ link.label }}
+        <span class="link-bracket">]</span>
+      </a>
+    </ng-container>
+  </div>
+
+  <!-- Botón de estado de Diagnóstico del Sistema -->
+  <div class="diagnostics-launcher">
+    <button class="sys-diag-btn" [class.diag-active]="isDiagnosticsOpen" (click)="toggleDiagnostics()">
+      <span class="diag-blink"></span>
+      <span class="diag-text">SYS_STATUS: RUNNING</span>
+    </button>
+  </div>
+
+  <!-- Botón de menú desplegable para pantallas pequeñas -->
+  <div class="menu-button">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
       <ng-container *ngFor="let link of navLinks">
-        <button mat-button class="nav-buttons color-primary" [routerLink]="link.path">
-          <!-- <mat-icon>{{ link.icon }}</mat-icon> -->
-          {{ link.label }}
+        <button mat-menu-item (click)="scrollToSection($event, link.path)" class="mobile-nav-btn">
+          <span>{{ link.label }}</span>
         </button>
       </ng-container>
-    </div>
-  
-    <!-- Botón de menú desplegable para pantallas pequeñas -->
-    <div class="menu-button">
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>menu</mat-icon>
+      <button mat-menu-item (click)="toggleDiagnostics()" class="mobile-nav-btn diag-opt">
+        <span>SYS DIAGNOSTICS</span>
       </button>
-      <mat-menu #menu="matMenu">
-        <ng-container *ngFor="let link of navLinks">
-          <button mat-menu-item [routerLink]="link.path" class="nav-button bg-primary">
-            <!-- <mat-icon>{{ link.icon }}</mat-icon> -->
-            <span>{{ link.label }}</span>
-          </button>
-        </ng-container>
-      </mat-menu>
-    </div>
-  </mat-toolbar>
+    </mat-menu>
+  </div>
+</mat-toolbar>
+
+<!-- Panel HUD lateral flotante de Diagnósticos del Sistema -->
+<div class="diagnostics-panel" *ngIf="isDiagnosticsOpen">
+  <div class="panel-header">
+    <span class="panel-title">// CORE_SYSTEM_DIAGNOSTICS</span>
+    <button class="panel-close-btn" (click)="toggleDiagnostics()">✕</button>
+  </div>
   
+  <div class="panel-body">
+    <!-- Telemetría rápida -->
+    <div class="diag-telemetry">
+      <div class="telemetry-line">
+        <span>INTERFACE LINK:</span>
+        <span class="val-active">STABLE</span>
+      </div>
+      <div class="telemetry-line">
+        <span>HOST NODE:</span>
+        <span class="val-info">PORTFOLIO_NEXUS_2026</span>
+      </div>
+    </div>
+
+    <!-- Controles de Configuración -->
+    <div class="diag-section">
+      <div class="section-title">OPCIONES_ACCESIBILIDAD</div>
+      
+      <!-- Toggle de efectos de sonido -->
+      <div class="control-row">
+        <div class="control-label">
+          <span>Efectos de Sonido</span>
+          <span class="control-desc">Pitidos analógicos al interactuar</span>
+        </div>
+        <button class="toggle-btn" [class.on]="!isAudioMuted" (click)="toggleAudioEffects()">
+          {{ isAudioMuted ? 'OFF' : 'ON' }}
+        </button>
+      </div>
+
+      <!-- Toggle de reducción de glitches -->
+      <div class="control-row">
+        <div class="control-label">
+          <span>Animaciones Glitch</span>
+          <span class="control-desc">Filtro de parpadeo y vibración</span>
+        </div>
+        <button class="toggle-btn" [class.on]="!isGlitchesReduced" (click)="toggleGlitches()">
+          {{ isGlitchesReduced ? 'REDUCED' : 'ACTIVE' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="diag-section">
+      <div class="section-title">AJUSTE_NUCLEO_ENERGIA</div>
+      
+      <!-- Cambio de esquema de color cyberpunk -->
+      <div class="theme-picker-row">
+        <button 
+          class="theme-pick-btn cian" 
+          [class.selected]="activeColorTheme === 'cian'"
+          (click)="changeColorTheme('cian')">
+          CIAN_GRID
+        </button>
+        <button 
+          class="theme-pick-btn fucsia" 
+          [class.selected]="activeColorTheme === 'fucsia'"
+          (click)="changeColorTheme('fucsia')">
+          PINK_LASER
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

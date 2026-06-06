@@ -1,10 +1,10 @@
 .skills-container {
   position: relative;
-  padding: 80px 40px;
-  background: linear-gradient(180deg, rgba(26, 26, 26, 0.9) 0%, rgba(15, 15, 15, 0.95) 100%);
-  border-bottom: 2px solid #1abc9c;
+  padding: 100px 40px;
+  background: radial-gradient(circle at 50% 10%, #060609 0%, #020204 100%);
+  border-bottom: 2px solid #ff0055;
   overflow: hidden;
-  min-height: 80vh;
+  min-height: 85vh;
 }
 
 .skills-container::before {
@@ -15,36 +15,54 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 50%, rgba(26, 188, 156, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(26, 188, 156, 0.03) 0%, transparent 50%);
+    radial-gradient(circle at 15% 50%, rgba(255, 0, 85, 0.04) 0%, transparent 50%),
+    radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.04) 0%, transparent 50%);
   pointer-events: none;
+  z-index: 2;
 }
 
+/* ========== HEADER HUD STYLING ========== */
 .skills-header {
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 70px;
   position: relative;
-  z-index: 2;
+  z-index: 3;
+}
+
+.hud-tag {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.75rem;
+  font-weight: 900;
+  color: #ff0055;
+  letter-spacing: 2px;
+  background: rgba(255, 0, 85, 0.15);
+  border: 1px solid rgba(255, 0, 85, 0.3);
+  padding: 4px 12px;
+  display: inline-block;
+  margin-bottom: 12px;
+  border-radius: 4px;
 }
 
 .skills-title {
   font-size: 2.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #1abc9c 0%, #0fb9d0 100%);
+  font-weight: 900;
+  background: linear-gradient(135deg, #00f0ff 0%, #ff0055 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 20px rgba(26, 188, 156, 0.3);
-  margin: 0 0 15px 0;
+  text-shadow: 0 0 25px rgba(0, 240, 255, 0.2);
+  margin: 0 0 10px 0;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .skills-subtitle {
   font-size: 1.1rem;
-  color: #aaa;
+  color: #888;
   font-weight: 300;
   margin: 0;
   letter-spacing: 0.5px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* ========== HONEYCOMB LAYOUT ========== */
@@ -53,7 +71,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   padding: 40px 0;
 }
 
@@ -69,37 +87,47 @@
 }
 
 /* Adjust margins to interlock hexagons vertically */
-.row-2 {
-  margin-top: -35px;
+.row-2 { margin-top: -38px; }
+.row-3 { margin-top: -38px; }
+.row-4 { margin-top: -38px; }
+
+/* ========== STAGGERED HEXAGON INITIAL ENTRANCE ========== */
+.animate-stagger {
+  opacity: 0;
+  animation: hex-reveal-3d 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
-.row-3 {
-  margin-top: -35px;
-}
-.row-4 {
-  margin-top: -35px;
+
+@keyframes hex-reveal-3d {
+  from {
+    opacity: 0;
+    transform: scale3d(0.5, 0.5, 0.5) rotate3d(1, 1, 0, 45deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1) rotate3d(0, 0, 0, 0deg);
+  }
 }
 
 /* ========== HEXAGON CSS ========== */
 .hexagon {
   position: relative;
   width: 160px;
-  height: 184px; /* width * 1.1547 (approx) */
-  margin: 0 10px; /* Horizontal spacing */
-  background: var(--hex-color, #1abc9c); /* Outer border color */
+  height: 184px; /* width * 1.1547 */
+  margin: 0 10px;
+  background: var(--hex-color, #00f0ff);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
   cursor: pointer;
   z-index: 1;
 }
 
-/* Creating the inner dark hexagon to form a border effect */
 .hexagon-inner {
   position: absolute;
   top: 3px; 
   left: 3px; 
   right: 3px; 
   bottom: 3px;
-  background: rgba(20, 20, 22, 0.95);
+  background: rgba(10, 10, 12, 0.96);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   display: flex;
   flex-direction: column;
@@ -114,40 +142,40 @@
   height: 55px;
   object-fit: contain;
   transition: transform 0.4s ease, filter 0.4s ease;
-  filter: drop-shadow(0 0 5px rgba(255,255,255,0.1));
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.1));
 }
 
 .hex-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #ddd;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #ccc;
   letter-spacing: 0.5px;
   transition: color 0.3s ease;
 }
 
 /* ========== HOVER EFFECTS ========== */
 .hexagon:hover {
-  transform: scale(1.1);
+  transform: scale(1.15) translateZ(10px);
   z-index: 10;
-  filter: drop-shadow(0 0 15px var(--hex-color, #1abc9c));
+  filter: drop-shadow(0 0 20px var(--hex-color, #00f0ff));
 }
 
 .hexagon:hover .hexagon-inner {
-  background: rgba(30, 30, 35, 0.95);
+  background: rgba(var(--hex-color, #00f0ff), 0.04);
 }
 
 .hexagon:hover .hex-icon {
-  transform: scale(1.1) translateY(-3px);
-  filter: drop-shadow(0 0 8px var(--hex-color, rgba(255,255,255,0.5)));
+  transform: scale(1.12) translateY(-4px);
+  filter: drop-shadow(0 0 8px var(--hex-color, rgba(255,255,255,0.6)));
 }
 
 .hexagon:hover .hex-name {
   color: #fff;
-  text-shadow: 0 0 10px var(--hex-color, rgba(255,255,255,0.5));
+  text-shadow: 0 0 8px var(--hex-color, rgba(255,255,255,0.6));
 }
 
-/* ========== PARTICLES ========== */
-.particles {
+/* ========== MATRIX RAIN BACKGROUND EFFECT ========== */
+.matrix-rain {
   position: absolute;
   top: 0;
   left: 0;
@@ -155,71 +183,81 @@
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  display: flex;
+  justify-content: space-around;
+  opacity: 0.12;
 }
 
-.particle {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: rgba(26, 188, 156, 0.6);
-  border-radius: 50%;
-  animation: float linear infinite;
+.rain-column {
+  display: flex;
+  flex-direction: column;
+  color: #00f0ff;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.85rem;
+  font-weight: 900;
+  line-height: 1.2;
+  user-select: none;
+  animation: fall linear infinite;
 }
 
-.particle:nth-child(1) { top: 10%; left: 10%; animation-duration: 15s; }
-.particle:nth-child(2) { top: 20%; left: 80%; animation-duration: 20s; }
-.particle:nth-child(3) { top: 50%; left: 5%; animation-duration: 25s; }
-.particle:nth-child(4) { top: 60%; left: 90%; animation-duration: 30s; }
-.particle:nth-child(5) { top: 80%; left: 50%; animation-duration: 22s; }
-.particle:nth-child(6) { top: 15%; left: 40%; animation-duration: 18s; }
-.particle:nth-child(7) { top: 70%; left: 25%; animation-duration: 28s; }
-.particle:nth-child(8) { top: 35%; left: 70%; animation-duration: 24s; }
-.particle:nth-child(9) { top: 55%; left: 15%; animation-duration: 26s; }
-.particle:nth-child(10) { top: 25%; left: 60%; animation-duration: 20s; }
+/* Individual column speed and delays */
+.rain-column:nth-child(1) { animation-duration: 12s; animation-delay: 0s; }
+.rain-column:nth-child(2) { animation-duration: 8s; animation-delay: 1s; }
+.rain-column:nth-child(3) { animation-duration: 15s; animation-delay: 3s; }
+.rain-column:nth-child(4) { animation-duration: 10s; animation-delay: 1.5s; }
+.rain-column:nth-child(5) { animation-duration: 18s; animation-delay: 0.5s; }
+.rain-column:nth-child(6) { animation-duration: 9s; animation-delay: 2.2s; }
+.rain-column:nth-child(7) { animation-duration: 13s; animation-delay: 4s; }
+.rain-column:nth-child(8) { animation-duration: 11s; animation-delay: 1s; }
+.rain-column:nth-child(9) { animation-duration: 14s; animation-delay: 2.8s; }
+.rain-column:nth-child(10) { animation-duration: 7s; animation-delay: 0.2s; }
+.rain-column:nth-child(11) { animation-duration: 16s; animation-delay: 3.5s; }
+.rain-column:nth-child(12) { animation-duration: 10s; animation-delay: 2s; }
+.rain-column:nth-child(13) { animation-duration: 12s; animation-delay: 0.8s; }
+.rain-column:nth-child(14) { animation-duration: 15s; animation-delay: 1.2s; }
+.rain-column:nth-child(15) { animation-duration: 9s; animation-delay: 3.1s; }
 
-@keyframes float {
-  0% { transform: translateY(0px) translateX(0px); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+@keyframes fall {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
   .skills-container { padding: 60px 20px; }
-  .skills-title { font-size: 2rem; }
+  .skills-title { font-size: 2.1rem; }
   .hexagon {
     width: 120px;
     height: 138px;
     margin: 0 5px;
   }
   .row-2, .row-3, .row-4 {
-    margin-top: -26px;
+    margin-top: -28px;
   }
   .hex-icon {
     width: 40px;
     height: 40px;
   }
   .hex-name {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
 
 @media (max-width: 480px) {
   .hexagon {
-    width: 100px;
-    height: 115px;
-    margin: 0 4px;
+    width: 95px;
+    height: 109px;
+    margin: 0 3px;
   }
   .row-2, .row-3, .row-4 {
-    margin-top: -22px;
+    margin-top: -21px;
   }
   .hex-icon {
-    width: 32px;
-    height: 32px;
-    gap: 5px;
+    width: 30px;
+    height: 30px;
   }
   .hex-name {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
+    letter-spacing: 0px;
   }
 }

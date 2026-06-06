@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -12,7 +12,22 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.css'
 })
-export class HeroComponent {
+export class HeroComponent implements OnInit, OnDestroy {
+  isBrowser: boolean;
+  
+  // Typing Effect Properties
+  phrases = [
+    'Desarrollador web profesional.',
+    'Ingeniero de Software Backend & Cloud.',
+    'Especialista en Inteligencia Artificial y Datos.',
+    'Creador de Soluciones Web de Alto Rendimiento.'
+  ];
+  currentText = '';
+  private phraseIndex = 0;
+  private charIndex = 0;
+  private isDeleting = false;
+  private typingTimeout: any = null;
+
   certificates = [
     {
       title: 'Java y Spring Boot',
@@ -55,4 +70,50 @@ export class HeroComponent {
       image: 'https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1778127564/OCI25FNDCFA_r4zdtn.jpg'
     }
   ];
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  ngOnInit() {
+    if (this.isBrowser) {
+      this.typePhrase();
+    } else {
+      this.currentText = this.phrases[0];
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.typingTimeout) {
+      clearTimeout(this.typingTimeout);
+    }
+  }
+
+  // Pure dynamic terminal text typing effect
+  typePhrase() {
+    const currentPhrase = this.phrases[this.phraseIndex];
+    
+    if (this.isDeleting) {
+      this.currentText = currentPhrase.substring(0, this.charIndex - 1);
+      this.charIndex--;
+    } else {
+      this.currentText = currentPhrase.substring(0, this.charIndex + 1);
+      this.charIndex++;
+    }
+
+    let typeSpeed = this.isDeleting ? 30 : 75;
+
+    if (!this.isDeleting && this.charIndex === currentPhrase.length) {
+      typeSpeed = 2000; // Wait 2s on full typed phrase
+      this.isDeleting = true;
+    } else if (this.isDeleting && this.charIndex === 0) {
+      this.isDeleting = false;
+      this.phraseIndex = (this.phraseIndex + 1) % this.phrases.length;
+      typeSpeed = 500; // Pause 0.5s before next phrase
+    }
+
+    this.typingTimeout = setTimeout(() => {
+      this.typePhrase();
+    }, typeSpeed);
+  }
 }

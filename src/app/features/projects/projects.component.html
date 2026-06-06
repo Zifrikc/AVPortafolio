@@ -1,24 +1,58 @@
 <div class="projects-container">
   <div class="projects-header">
+    <div class="hud-tag">NET_RECORDS_v2.5</div>
     <h2 class="projects-title">Proyectos Destacados</h2>
-    <p class="projects-subtitle">Colección de Trabajos Realizados</p>
+    <p class="projects-subtitle">Sistemas e Interfaces Desplegados en la Red</p>
+
+    <!-- Panel de Filtros Cyberpunk HUD -->
+    <div class="projects-filters">
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'ALL'" 
+        (click)="selectedCategory = 'ALL'">
+        <span>ALL_NETWORKS</span>
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'AI'" 
+        (click)="selectedCategory = 'AI'">
+        <span>AI_&_COGNITIVE</span>
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'WEB'" 
+        (click)="selectedCategory = 'WEB'">
+        <span>WEB_SYSTEMS</span>
+      </button>
+      <button 
+        class="filter-btn" 
+        [class.active]="selectedCategory === 'CLOUD'" 
+        (click)="selectedCategory = 'CLOUD'">
+        <span>CLOUD_&_BACKEND</span>
+      </button>
+    </div>
   </div>
 
-  <!-- Projects Grid -->
+  <!-- Grid de Proyectos Filtrados -->
   <div class="projects-grid">
     <div 
-      *ngFor="let project of projects" 
+      *ngFor="let project of filteredProjects" 
       class="project-card-wrapper"
+      #cardElement
+      (mousemove)="onMouseMove($event, cardElement)"
+      (mouseleave)="onMouseLeave(cardElement)"
       [class.hover]="hoveredProjectId === project.id"
       (mouseenter)="hoveredProjectId = project.id"
       (mouseleave)="hoveredProjectId = null">
       
-      <!-- Card Container with 3D flip -->
+      <!-- Contenedor 3D que recibe la rotación dinámica desde las variables CSS -->
       <div class="project-card-3d">
-        
-        <!-- Front Side -->
+        <!-- Glare reflect effect layer -->
+        <div class="card-glare"></div>
+
+        <!-- Cara Frontal -->
         <div class="project-card-front">
-          <!-- Card Header with complexity indicator -->
+          <!-- Cabecera de la Tarjeta con estrellas y icono HUD -->
           <div class="card-header">
             <div class="card-stars">
               <span *ngFor="let _ of getStarArray(project.stars)" class="star">★</span>
@@ -27,48 +61,49 @@
             <div class="card-icon" [title]="project.icon">{{ project.icon }}</div>
           </div>
 
-          <!-- Card Image -->
+          <!-- Imagen del Proyecto con filtro holográfico -->
           <div class="card-image-container">
             <img [src]="project.imageUrl" [alt]="project.title" class="card-image">
             <div class="image-overlay"></div>
+            <div class="card-tag-badge">{{ project.category }}</div>
           </div>
 
-          <!-- Card Body -->
+          <!-- Cuerpo de la Tarjeta -->
           <div class="card-body">
             <h3 class="card-title">{{ project.title }}</h3>
             <p class="card-description">{{ project.description }}</p>
           </div>
 
-
-
-          <!-- Click Hint -->
-          <div class="card-hint">Click para detalles</div>
+          <!-- Pista de Interacción táctil -->
+          <div class="card-hint">SINC_LINK // CLICK_FOR_DATA</div>
         </div>
 
-        <!-- Back Side -->
+        <!-- Cara Posterior (Flip) -->
         <div class="project-card-back">
           <div class="back-content">
             <div class="av-logo">AV</div>
             <div class="back-title">{{ project.title }}</div>
+            <div class="back-subtitle">DATALINK ESTABLISHED</div>
+            
             <div class="back-buttons">
               <a 
                 *ngIf="project.github" 
                 [href]="project.github" 
                 target="_blank"
                 class="back-button github">
-                <span>GitHub</span>
+                <span>VER GITHUB</span>
               </a>
               <a 
                 *ngIf="project.demo" 
                 [href]="project.demo" 
                 target="_blank"
                 class="back-button demo">
-                <span>Demo</span>
+                <span>LIVE DEMO</span>
               </a>
               <button 
                 (click)="openProjectModal(project)"
                 class="back-button details">
-                <span>Detalles</span>
+                <span>DIAGNOSTICS</span>
               </button>
             </div>
           </div>
@@ -77,76 +112,102 @@
     </div>
   </div>
 
-  <!-- Project Details Modal -->
+  <!-- Modal Premium con Scanlines CRT y de tubo de fósforo -->
   <div class="modal-overlay" *ngIf="isModalOpen" (click)="closeProjectModal()">
     <div class="modal-content" (click)="$event.stopPropagation()" *ngIf="selectedProject">
+      
+      <!-- CRT overlays -->
+      <div class="crt-lines"></div>
+      <div class="crt-glow-flicker"></div>
+      
       <button class="modal-close" (click)="closeProjectModal()">✕</button>
       
       <div class="modal-inner">
-        <!-- Left side - Image -->
+        <!-- Sección Izquierda: Media e iconos HUD -->
         <div class="modal-image-section">
-          <img [src]="selectedProject.imageUrl" [alt]="selectedProject.title" class="modal-image">
+          <div class="modal-img-hud">
+            <div class="hud-bracket top-left"></div>
+            <div class="hud-bracket top-right"></div>
+            <div class="hud-bracket bottom-left"></div>
+            <div class="hud-bracket bottom-right"></div>
+            <img [src]="selectedProject.imageUrl" [alt]="selectedProject.title" class="modal-image">
+          </div>
+          
           <div class="modal-tech-stack">
-            <span class="tech-stack-label">TECH STACK:</span>
+            <span class="tech-stack-label">MODULE_INTEGRITY_COMPILER:</span>
             <div class="tech-icons">
               <div *ngFor="let tech of selectedProject.technologies" 
                    class="tech-item"
                    [title]="tech.name">
-                {{ tech.logo }}
+                <span class="tech-logo">{{ tech.logo }}</span>
+                <span class="tech-hover-label">{{ tech.name }}</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right side - Details -->
+        <!-- Sección Derecha: Datos, Descripción y Estadísticas Animadas -->
         <div class="modal-details-section">
+          <div class="modal-category-badge">{{ selectedProject.category }}_CORE_SYSTEM</div>
           <h2 class="modal-title">{{ selectedProject.title }}</h2>
           
+          <!-- Estadísticas Tácticas de estilo HUD Militar -->
           <div class="modal-stats">
             <div class="modal-stat">
-              <span class="modal-stat-label">Complejidad</span>
+              <div class="modal-stat-header">
+                <span class="modal-stat-label">COMPLEXITY_INDEX</span>
+                <span class="modal-stat-value">{{ selectedProject.complexity }}%</span>
+              </div>
               <div class="modal-stat-bar">
                 <div class="modal-stat-fill" [style.width.%]="selectedProject.complexity"></div>
               </div>
             </div>
+            
             <div class="modal-stat">
-              <span class="modal-stat-label">Poder Técnico</span>
+              <div class="modal-stat-header">
+                <span class="modal-stat-label">TECH_POWER_RATIO</span>
+                <span class="modal-stat-value">{{ selectedProject.techPower }}%</span>
+              </div>
               <div class="modal-stat-bar">
-                <div class="modal-stat-fill" [style.width.%]="selectedProject.techPower"></div>
+                <div class="modal-stat-fill cian-glow" [style.width.%]="selectedProject.techPower"></div>
               </div>
             </div>
           </div>
 
+          <!-- Descripción del sistema -->
           <div class="modal-description">
-            <h3>Descripción</h3>
+            <h3>LOGS_AND_DESCRIPTION:</h3>
             <p>{{ selectedProject.fullDescription }}</p>
           </div>
 
+          <!-- Lista de Habilidades Relacionadas -->
           <div class="modal-technologies">
-            <h3>Tecnologías Utilizadas</h3>
+            <h3>SINC_MODULE_LINK:</h3>
             <div class="tech-list">
               <span *ngFor="let tech of selectedProject.technologies" 
                     class="tech-badge"
-                    [style.borderColor]="tech.color">
+                    [style.borderColor]="tech.color"
+                    [style.color]="tech.color">
                 {{ tech.name }}
               </span>
             </div>
           </div>
 
+          <!-- Botones de Acción Neón -->
           <div class="modal-actions">
             <a 
               *ngIf="selectedProject.github"
               [href]="selectedProject.github"
               target="_blank"
               class="action-button github">
-              Ver en GitHub
+              SYSTEM_REPOS
             </a>
             <a 
               *ngIf="selectedProject.demo"
               [href]="selectedProject.demo"
               target="_blank"
               class="action-button demo">
-              Ver Demo
+              EXECUTE_DEMO
             </a>
           </div>
         </div>

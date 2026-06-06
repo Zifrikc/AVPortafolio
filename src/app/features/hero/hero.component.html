@@ -1,25 +1,45 @@
 <div class="hero-container">
-    <div class="hero-overlay"></div>
-    <div class="spline-background">
+    <!-- Spline Spheres Decorativas -->
+    <div class="spline-sphere spline-top-left">
       <spline-viewer url="https://prod.spline.design/AdtgVNYrHnVbOU7z/scene.splinecode"></spline-viewer>
     </div>
+    <div class="spline-sphere spline-bottom-right">
+      <spline-viewer url="https://prod.spline.design/AdtgVNYrHnVbOU7z/scene.splinecode"></spline-viewer>
+    </div>
+    
+    <div class="hero-overlay"></div>
+    
     <div class="hero-content">
+      <!-- Foto de Perfil enmarcada en HUD Táctico -->
       <div class="profile-img-container">
-        <img class="profile-img" src="https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1751728192/avatar2_oicuzt.png" alt="Ashley Zifrikc V.T." />
+        <div class="hud-target-frame">
+          <div class="hud-corner top-left"></div>
+          <div class="hud-corner top-right"></div>
+          <div class="hud-corner bottom-left"></div>
+          <div class="hud-corner bottom-right"></div>
+          <div class="scanline-bar"></div>
+          <img class="profile-img" src="https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1751728192/avatar2_oicuzt.png" alt="Ashley Zifrikc V.T." />
+        </div>
       </div>
+
+      <!-- Texto del Hero -->
       <div class="hero-text">
-        <h1>Ashley Zifrikc V.T.</h1>
-        <p class="p-style">Desarrollador web profesional.</p> 
-        <p>Transformo ideas en experiencias digitales.</p>
-        <p>Mi objetivo es diseñar y construir aplicaciones web innovadoras que conecten, inspiren y generen impacto.</p>
+        <!-- Título con efecto glitch de neón -->
+        <h1 class="glitch" data-text="Ashley Zifrikc V.T.">Ashley Zifrikc V.T.</h1>
+        
+        <!-- Subtítulo de Escritura Dinámica (Terminal) -->
+        <div class="typing-container">
+          <span class="p-style">> {{ currentText }}</span>
+          <span class="cursor-blink">_</span>
+        </div>
+        
+        <p class="mission-text">Transformo ideas complejas en infraestructuras digitales óptimas, elegantes y seguras.</p>
+        <p class="sub-mission-text">Mi misión es diseñar y construir arquitecturas backend robustas y experiencias frontend de alta fidelidad que redefinan el futuro digital.</p>
         
         <div class="hero-buttons">
-          <button class="btnModels" mat-raised-button routerLink="/projects">Ver Proyectos</button>
-          <button class="btnModels" mat-raised-button data-bs-toggle="modal" data-bs-target="#certificatesModal">Ver Certificados</button>
+          <a class="btnModels" href="#projects">Ver Proyectos</a>
+          <button class="btnModels" data-bs-toggle="modal" data-bs-target="#certificatesModal">Ver Certificados</button>
         </div>
-
-        <elevenlabs-convai agent-id="agent_4901k5w52pbjesatdx69v81q9f7t"></elevenlabs-convai>
-        <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
       </div>
     </div>
   </div>

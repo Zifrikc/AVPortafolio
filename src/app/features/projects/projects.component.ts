@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 
@@ -18,6 +18,7 @@ interface Project {
   stars: number;
   techPower: number;
   complexity: number;
+  category: 'AI' | 'WEB' | 'CLOUD';
   technologies: ProjectTech[];
   fullDescription: string;
   github?: string;
@@ -32,6 +33,12 @@ interface Project {
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent {
+  isBrowser: boolean;
+  selectedCategory = 'ALL';
+  hoveredProjectId: number | null = null;
+  selectedProject: Project | null = null;
+  isModalOpen = false;
+
   projects: Project[] = [
     {
       id: 1,
@@ -42,6 +49,7 @@ export class ProjectsComponent {
       stars: 4,
       techPower: 95,
       complexity: 85,
+      category: 'AI',
       technologies: [
         { name: 'Python', logo: '🐍', color: '#3776AB' },
         { name: 'JavaScript', logo: '📜', color: '#F7DF1E' },
@@ -61,10 +69,11 @@ export class ProjectsComponent {
       stars: 3,
       techPower: 70,
       complexity: 55,
+      category: 'WEB',
       technologies: [
         { name: 'Ionic', logo: '⚡', color: '#176BFF' },
         { name: 'Angular', logo: '🔴', color: '#DD0031' },
-        { name: 'TypeScript', logo: '💙', color: '#2B7A0B' },
+        { name: 'TypeScript', logo: '💙', color: '#3178C6' },
         { name: 'Mobile', logo: '📱', color: '#1abc9c' }
       ],
       fullDescription: 'Aplicación móvil educativa desarrollada con Ionic Framework que permite a estudiantes practicar conversión y operaciones en sistema numérico Base 10. Incluye ejercicios progresivos, estadísticas de aprendizaje y interfaz gamificada.',
@@ -80,11 +89,12 @@ export class ProjectsComponent {
       stars: 5,
       techPower: 90,
       complexity: 80,
+      category: 'AI',
       technologies: [
-        { name: 'Streamlit', logo: '🔴', color: '#DD0031' },
-        { name: 'Python', logo: '🔄', color: '#B7178C' },
+        { name: 'Streamlit', logo: '🔴', color: '#FF4B4B' },
+        { name: 'Python', logo: '🐍', color: '#3776AB' },
         { name: 'Matplotlib', logo: '📊', color: '#F9A03C' },
-        { name: 'Java', logo: '🟢', color: '#339933' }
+        { name: 'Java', logo: '☕', color: '#007396' }
       ],
       fullDescription: 'Un dashboard interactivo construido con Angular y D3.js para monitorear métricas financieras clave. Incluye gráficos dinámicos, actualizaciones en tiempo real via WebSockets y exportación de reportes a PDF.',
       github: 'https://github.com/HackathonONELatam-ChurnInsight',
@@ -99,6 +109,7 @@ export class ProjectsComponent {
       stars: 4,
       techPower: 85,
       complexity: 75,
+      category: 'CLOUD',
       technologies: [
         { name: 'Java', logo: '☕', color: '#007396' },
         { name: 'Spring Boot', logo: '🍃', color: '#6DB33F' },
@@ -114,15 +125,16 @@ export class ProjectsComponent {
       title: 'Multi Cloud Reporting Metrics',
       description: 'Dashboard de gestion de alertas de servicios en la nube',
       imageUrl: 'https://res.cloudinary.com/tecnologi-zifrikc/image/upload/v1778133179/f6b0e5da-94a9-4c86-afaf-6dedee52de19.png',
-      icon: '🛒',
+      icon: '📊',
       stars: 4,
       techPower: 80,
       complexity: 70,
+      category: 'CLOUD',
       technologies: [
-        { name: 'Angular', logo: '⚛️', color: '#61DAFB' },
-        { name: 'Node.js', logo: '▲', color: '#000000' },
-        { name: 'Java', logo: '🌊', color: '#06B6D4' },
-        { name: 'Python', logo: '💳', color: '#008CDD' }
+        { name: 'Angular', logo: '🔴', color: '#DD0031' },
+        { name: 'Node.js', logo: '⬢', color: '#339933' },
+        { name: 'Java', logo: '☕', color: '#007396' },
+        { name: 'Python', logo: '🐍', color: '#3776AB' }
       ],
       fullDescription: 'Plataforma de comercio electrónico de alto rendimiento desarrollada con Next.js. Ofrece navegación ultrarrápida, carrito de compras persistente, integración de pagos con Stripe y diseño responsive con Tailwind CSS.',
       github: 'https://github.com',
@@ -137,6 +149,7 @@ export class ProjectsComponent {
       stars: 5,
       techPower: 88,
       complexity: 82,
+      category: 'WEB',
       technologies: [
         { name: 'Vue.js', logo: '💚', color: '#4FC08D' },
         { name: 'Firebase', logo: '🔥', color: '#FFCA28' },
@@ -149,19 +162,57 @@ export class ProjectsComponent {
     }
   ];
 
-  selectedProject: Project | null = null;
-  isModalOpen: boolean = false;
-  hoveredProjectId: number | null = null;
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  get filteredProjects() {
+    if (this.selectedCategory === 'ALL') {
+      return this.projects;
+    }
+    return this.projects.filter(p => p.category === this.selectedCategory);
+  }
+
+  // --- INTERACTIVE 3D TILT EFFECT FOR PREMIUM CARD EXPERIENCE ---
+  onMouseMove(event: MouseEvent, card: HTMLElement) {
+    if (!this.isBrowser) return;
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((centerY - y) / centerY) * 12; // Cap angle at 12deg
+    const rotateY = ((x - centerX) / centerX) * 12;
+
+    card.style.setProperty('--rotate-x', `${rotateX}deg`);
+    card.style.setProperty('--rotate-y', `${rotateY}deg`);
+    card.style.setProperty('--glare-opacity', '0.2');
+    card.style.setProperty('--glare-x', `${(x / rect.width) * 100}%`);
+    card.style.setProperty('--glare-y', `${(y / rect.height) * 100}%`);
+  }
+
+  onMouseLeave(card: HTMLElement) {
+    if (!this.isBrowser) return;
+    card.style.setProperty('--rotate-x', '0deg');
+    card.style.setProperty('--rotate-y', '0deg');
+    card.style.setProperty('--glare-opacity', '0');
+  }
 
   openProjectModal(project: Project): void {
     this.selectedProject = project;
     this.isModalOpen = true;
-    document.body.style.overflow = 'hidden';
+    if (this.isBrowser) {
+      document.body.style.overflow = 'hidden';
+    }
   }
 
   closeProjectModal(): void {
     this.isModalOpen = false;
-    document.body.style.overflow = 'auto';
+    if (this.isBrowser) {
+      document.body.style.overflow = 'auto';
+    }
     this.selectedProject = null;
   }
 

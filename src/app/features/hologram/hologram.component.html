@@ -1,0 +1,118 @@
+<!-- Flotador del Proyector del Holograma (Base HUD) -->
+<div class="hologram-launcher" [class.glitch-active]="isGlitching" (click)="toggleHologram()" title="Activar Interfaz de IA NEXUS">
+  <div class="launcher-glow"></div>
+  <div class="launcher-scanner"></div>
+  <div class="launcher-core">
+    <div class="core-symbol">N</div>
+  </div>
+  <span class="launcher-label">NEXUS CORE</span>
+</div>
+
+<!-- Ventana de Interfaz Holográfica Expandida -->
+<div class="hologram-interface" *ngIf="isOpen" [class.glitch-window]="isGlitching">
+  <!-- CRT Scanline overlay -->
+  <div class="crt-overlay"></div>
+  
+  <!-- Header del HUD -->
+  <div class="hologram-header">
+    <div class="hud-indicator">
+      <span class="hud-blink"></span>
+      <span class="hud-title">NEXUS CORE AI // LINK PROT: SECURE</span>
+    </div>
+    <div class="hud-controls">
+      <button class="hud-btn" (click)="isMuted = !isMuted" [title]="isMuted ? 'Activar Audio' : 'Silenciar Audio'">
+        <span *ngIf="!isMuted">🔊</span>
+        <span *ngIf="isMuted">🔇</span>
+      </button>
+      <button class="hud-btn close-btn" (click)="toggleHologram()">✕</button>
+    </div>
+  </div>
+
+  <!-- Contenedor Interno de dos secciones (Avatar e Información + Terminal de Comandos) -->
+  <div class="hologram-body">
+    
+    <!-- Sección Izquierda: Visualizadores del Sistema e Integración de Voz -->
+    <div class="system-section">
+      <div class="avatar-container">
+        <!-- Haz de Proyección de luz inferior -->
+        <div class="projection-beam"></div>
+        
+        <!-- Anillos holográficos concéntricos -->
+        <div class="hologram-rings" [class.rotating-fast]="isThinking" [class.glitch-active]="isGlitching">
+          <div class="ring outer-ring"></div>
+          <div class="ring middle-ring"></div>
+          <div class="ring inner-ring"></div>
+          <div class="core-avatar">
+            <div class="avatar-eyes">
+              <span class="eye"></span>
+              <span class="eye"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canvas de Visualización de Ondas de Voz / Ruido -->
+      <div class="wave-visualizer">
+        <canvas #audioCanvas></canvas>
+        <div class="signal-label">AUDIO FREQ SYNC: {{ syncFrequency }}Hz</div>
+      </div>
+
+      <!-- Telemetría HUD -->
+      <div class="telemetry-info">
+        <div class="telemetry-row">
+          <span>STABILITY:</span>
+          <span class="telemetry-val" [class.low]="systemStability < 96">{{ systemStability }}%</span>
+        </div>
+        <div class="telemetry-row">
+          <span>SYS STATUS:</span>
+          <span class="telemetry-val text-neon-green">ACTIVE</span>
+        </div>
+        <div class="telemetry-row">
+          <span>AI HOST:</span>
+          <span class="telemetry-val">NEXUS_v7.4</span>
+        </div>
+      </div>
+
+      <!-- Cabina de Integración para el Widget ElevenLabs -->
+      <div class="elevenlabs-cabin">
+        <div class="cabin-header">VOICE INTERCOMM TRANSMISSION</div>
+        <div class="cabin-inner">
+          <ng-content></ng-content>
+          <div class="voice-hint">Haz clic en el widget superior para iniciar comunicación directa por voz neural.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección Derecha: Consola Terminal CRT Interactiva -->
+    <div class="terminal-section">
+      <div class="terminal-header">NEXUS OPERATIONAL CONSOLE</div>
+      
+      <div class="terminal-body" #terminalBody>
+        <div class="terminal-rows">
+          <div class="terminal-row" *ngFor="let line of terminalLines" [ngClass]="'line-' + line.type">
+            <span class="line-timestamp">[{{ line.timestamp }}]</span>
+            <span class="line-text">{{ line.text }}</span>
+          </div>
+          <!-- Thinking indicator -->
+          <div class="terminal-row line-system" *ngIf="isThinking">
+            <span class="line-timestamp">[{{ getCurrentTime() }}]</span>
+            <span class="line-text thinking-dots">NEXUS is thinking</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Línea de entrada de comandos -->
+      <div class="terminal-input-container">
+        <span class="terminal-prompt">guest&#64;nexus_core:~$</span>
+        <input 
+          type="text" 
+          [(ngModel)]="userInput" 
+          (keydown.enter)="handleCommandSubmit()" 
+          placeholder="Escribe un comando... (ej. help)" 
+          class="terminal-input"
+          [disabled]="isThinking" />
+        <button class="terminal-submit-btn" (click)="handleCommandSubmit()" [disabled]="isThinking">SEND</button>
+      </div>
+    </div>
+  </div>
+</div>
