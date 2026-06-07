@@ -1,0 +1,376 @@
+/* ========================================= */
+/* AGENT JACK BUTTON AND CONTAINER STYLES   */
+/* ========================================= */
+
+.agent-button {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #00f0ff;
+  background: rgba(0, 240, 255, 0.08);
+  border: 1.5px solid #00f0ff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 998;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agent-button:hover {
+  background: rgba(0, 240, 255, 0.18);
+  box-shadow: 0 0 40px rgba(0, 240, 255, 0.6);
+  transform: scale(1.1);
+  color: #fff;
+}
+
+.agent-button:active {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+}
+
+.agent-container {
+  position: fixed;
+  bottom: -520px;
+  right: 30px;
+  width: 420px;
+  height: 520px;
+  background: linear-gradient(135deg, rgba(8, 8, 12, 0.98) 0%, rgba(4, 4, 6, 0.99) 100%);
+  border: 2px solid #00f0ff;
+  border-radius: 8px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 240, 255, 0.4);
+  z-index: 999;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+}
+
+.agent-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00f0ff, transparent);
+  animation: scan-line 3s infinite;
+  z-index: 10;
+}
+
+@keyframes scan-line {
+  0%, 100% { top: 0; opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.agent-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1.5px solid #00f0ff;
+  border-radius: 50%;
+  color: #00f0ff;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 0;
+}
+
+.agent-close-btn:hover {
+  background: rgba(255, 0, 85, 0.25);
+  border-color: #ff0055;
+  color: #ff0055;
+  box-shadow: 0 0 15px rgba(255, 0, 85, 0.5);
+  transform: rotate(90deg);
+}
+
+.agent-container.show {
+  bottom: 30px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 240, 255, 0.5);
+}
+
+elevenlabs-convai {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .agent-button {
+    bottom: 60px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 0.9rem;
+  }
+
+  .agent-container {
+    bottom: -420px;
+    right: 20px;
+    width: 360px;
+    height: 420px;
+  }
+
+  .agent-container.show {
+    bottom: 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* MECHA UI — ARROW BUTTON (RIGHT EDGE)          */
+/* ═══════════════════════════════════════════════════ */
+
+.mecha-arrow-btn {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.mecha-arrow-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Arrow triangle shape — points left ≡ into the page */
+.mecha-arrow-shape {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 38px 28px 38px 0;
+  border-color: transparent rgba(0, 240, 255, 0.75) transparent transparent;
+  filter: drop-shadow(-4px 0 12px rgba(0, 240, 255, 0.6));
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  flex-shrink: 0;
+}
+
+.mecha-arrow-btn:hover .mecha-arrow-shape {
+  border-color: transparent #00f0ff transparent transparent;
+  filter: drop-shadow(-6px 0 20px rgba(0, 240, 255, 0.9));
+  transform: translateX(4px);
+}
+
+/* Tooltip — slides in from right on hover */
+.mecha-arrow-tooltip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: rgba(4, 4, 8, 0.92);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  backdrop-filter: blur(10px);
+  box-shadow: -4px 0 20px rgba(0, 240, 255, 0.15);
+}
+
+.mecha-arrow-btn:hover .mecha-arrow-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mecha-tooltip-icon {
+  font-size: 1rem;
+  filter: drop-shadow(0 0 4px rgba(0, 240, 255, 0.6));
+}
+
+.mecha-tooltip-text {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #00f0ff;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════ */
+/* MECHA UI — FULLSCREEN OVERLAY                      */
+/* ═══════════════════════════════════════════════════ */
+
+.mecha-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  background: #050505;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.03);
+  transition:
+    opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mecha-fullscreen.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+
+/* Top bar */
+.mecha-topbar {
+  height: 44px;
+  min-height: 44px;
+  background: rgba(4, 4, 6, 0.98);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  gap: 16px;
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+
+.mecha-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mecha-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.mecha-dot.red    { background: #ff5f57; box-shadow: 0 0 6px #ff5f57; }
+.mecha-dot.yellow { background: #ffbd2e; box-shadow: 0 0 6px #ffbd2e; }
+.mecha-dot.green  { background: #28c840; box-shadow: 0 0 6px #28c840; }
+
+.mecha-topbar-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(0, 240, 255, 0.8);
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+}
+
+.mecha-back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  background: rgba(0, 240, 255, 0.06);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  border-radius: 4px;
+  color: rgba(0, 240, 255, 0.85);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.mecha-back-btn:hover {
+  background: rgba(0, 240, 255, 0.16);
+  border-color: #00f0ff;
+  color: #fff;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+}
+
+/* iframe */
+.mecha-frame {
+  width: 100%;
+  flex: 1;
+  border: none;
+  background: #050505;
+  display: block;
+}
+
+/* Loading overlay */
+.mecha-frame-loading {
+  position: absolute;
+  inset: 44px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: #050505;
+  color: rgba(0, 240, 255, 0.7);
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  pointer-events: none;
+  z-index: 1;
+  animation: hide-loader 0.4s ease 2.5s forwards;
+}
+
+@keyframes hide-loader {
+  to { opacity: 0; visibility: hidden; }
+}
+
+.mecha-loader-ring {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(0, 240, 255, 0.15);
+  border-top-color: #00f0ff;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .mecha-portal-btn {
+    left: 16px;
+    bottom: 100px;
+  }
+
+  .mecha-arrow-btn {
+    top: auto;
+    bottom: 120px;
+    transform: none;
+  }
+
+  .mecha-arrow-shape {
+    border-width: 28px 20px 28px 0;
+  }
+
+  .mecha-topbar-title {
+    display: none;
+  }
+
+  .mecha-back-btn {
+    font-size: 0.7rem;
+    padding: 6px 12px;
+    letter-spacing: 0.5px;
+  }
+}

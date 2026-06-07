@@ -5,9 +5,56 @@
 <router-outlet></router-outlet>
 <app-footer></app-footer>
 
-<!-- Hologram Interactivo de Inteligencia Artificial (NEXUS Core AI) -->
-<app-hologram>
+<!-- ElevenLabs Agent Jack Button -->
+<button id="toggle-agent" class="agent-button" onclick="document.getElementById('agent-container').classList.toggle('show')">
+  AG
+</button>
+<div id="agent-container" class="agent-container">
+  <button class="agent-close-btn" onclick="document.getElementById('agent-container').classList.remove('show')">✕</button>
   <elevenlabs-convai agent-id="agent_4901k5w52pbjesatdx69v81q9f7t"></elevenlabs-convai>
-</app-hologram>
+</div>
+<!-- ═══════════════════════════════════════════ -->
+<!-- MECHA UI — Arrow Portal Button (Right)      -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="mecha-arrow-btn" (click)="openMecha()" [class.hidden]="showMecha">
+  <div class="mecha-arrow-tooltip">
+    <span class="mecha-tooltip-icon">🎵</span>
+    <span class="mecha-tooltip-text">Music Chill</span>
+  </div>
+  <div class="mecha-arrow-shape"></div>
+</div>
 
+<!-- ═══════════════════════════════════════════ -->
+<!-- MECHA UI — Full Screen Overlay              -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="mecha-fullscreen" [class.open]="showMecha">
+  <!-- Top bar -->
+  <div class="mecha-topbar">
+    <div class="mecha-topbar-left">
+      <span class="mecha-dot red"></span>
+      <span class="mecha-dot yellow"></span>
+      <span class="mecha-dot green"></span>
+      <span class="mecha-topbar-title">🤖 MECHA — CHILL LOFI</span>
+    </div>
+    <button class="mecha-back-btn" (click)="closeMecha()">
+      <span>◀</span> Volver al Portafolio
+    </button>
+  </div>
+
+  <!-- iframe -->
+  <iframe
+    *ngIf="showMecha"
+    src="https://mecha-chill-lofit.vercel.app/"
+    class="mecha-frame"
+    allow="autoplay; fullscreen"
+    frameborder="0"
+    title="MechaUI Chill Lofi Experience">
+  </iframe>
+
+  <!-- Loading indicator while iframe loads -->
+  <div class="mecha-frame-loading" id="mechaLoading">
+    <div class="mecha-loader-ring"></div>
+    <p>Iniciando MECHA...</p>
+  </div>
+</div>
 

@@ -173,33 +173,6 @@ export class ProjectsComponent {
     return this.projects.filter(p => p.category === this.selectedCategory);
   }
 
-  // --- INTERACTIVE 3D TILT EFFECT FOR PREMIUM CARD EXPERIENCE ---
-  onMouseMove(event: MouseEvent, card: HTMLElement) {
-    if (!this.isBrowser) return;
-    const rect = card.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((centerY - y) / centerY) * 12; // Cap angle at 12deg
-    const rotateY = ((x - centerX) / centerX) * 12;
-
-    card.style.setProperty('--rotate-x', `${rotateX}deg`);
-    card.style.setProperty('--rotate-y', `${rotateY}deg`);
-    card.style.setProperty('--glare-opacity', '0.2');
-    card.style.setProperty('--glare-x', `${(x / rect.width) * 100}%`);
-    card.style.setProperty('--glare-y', `${(y / rect.height) * 100}%`);
-  }
-
-  onMouseLeave(card: HTMLElement) {
-    if (!this.isBrowser) return;
-    card.style.setProperty('--rotate-x', '0deg');
-    card.style.setProperty('--rotate-y', '0deg');
-    card.style.setProperty('--glare-opacity', '0');
-  }
-
   openProjectModal(project: Project): void {
     this.selectedProject = project;
     this.isModalOpen = true;
@@ -219,4 +192,20 @@ export class ProjectsComponent {
   getStarArray(count: number): number[] {
     return Array(count).fill(0).map((_, i) => i);
   }
+
+  onMouseMove(event: MouseEvent, card: HTMLElement): void {
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+  }
+
+  onMouseLeave(card: HTMLElement): void {
+    card.style.transform = '';
+  }
 }
+
